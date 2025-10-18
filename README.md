@@ -1,3 +1,8 @@
+## 支持/Support
+如果觉得这个项目有用的话请给一颗⭐️，非常感谢。
+
+If you find this project useful, please leave a ⭐️ for me. Thank you very much.
+
 # 使用方式
 在`config.ini`中配置Token和天数,运行`main.py`即可
 
@@ -15,3 +20,4 @@
 <img width="1512" height="945" alt="image" src="https://github.com/user-attachments/assets/36e9a066-004b-499a-a106-75f5686ba181" />
 
 复制`token`内所有内容，注意不包括双引号，粘贴到`config.ini`中`your_token_here`处
+
