@@ -15,23 +15,57 @@ def fetchActivityLibList(headers):
     url='https://zjczs.scu.edu.cn/ccyl-api/app/activity/list-activity-library'
     #{ "pn": 1, "time": "1760769825192", "ps": 10, "level": "", "scoreType": "", "org": "", "order": "", "status": "SIGNUPING", "quality": "" }
     #1760769978.8043609
-    payload={
+    payloads=[{
         "pn": 1,
         "time": str(int(time.time()*1000)),
         "ps": 2147483647,
         "level": "",
         "scoreType": "",
         "org": "",
-        "order": "",
-        "status": "SIGNUPING,DOING",
+        "order": "updateTime",
+        "status": "SIGNUPING",
         "quality": ""
-    }
-    response0=requests.post(url=url, headers=headers,json=payload)
-    jresponse0=response0.json()['list']
-    #print(jresponse0)
-    #cc=0
-    #ActivityLibList=[]
-    return jresponse0
+    },
+    {
+        "pn": 1,
+        "time": str(int(time.time()*1000)),
+        "ps": 2147483647,
+        "level": "",
+        "scoreType": "",
+        "org": "",
+        "order": "updateTime",
+        "status": "DOING",
+        "quality": ""
+    }]
+
+    ActivityLibList = []
+    seen = set()
+    for idx, payload in enumerate(payloads, start=1):
+        try:
+            logger.info(f"Requesting activity library list (payload #{idx}, status={payload.get('status','')})")
+            response = requests.post(url=url, headers=headers, json=payload, timeout=10)
+            response.raise_for_status()
+            data = response.json()
+            lst = data.get('list', [])
+            if not isinstance(lst, list):
+                logger.warning(f"Unexpected list format for payload #{idx}: {type(lst)}")
+                continue
+
+            for item in lst:
+                aid = item.get('activityLibraryId')
+                if aid is None:
+                    continue
+                if aid in seen:
+                    continue
+                seen.add(aid)
+                ActivityLibList.append(item)
+
+            logger.info(f"Payload #{idx} returned {len(lst)} items, merged so far: {len(ActivityLibList)} unique entries.")
+        except Exception as e:
+            logger.error(f"Error fetching activity library list for payload #{idx}: {e}")
+
+    logger.info(f"Merged activity libraries: {len(ActivityLibList)} unique entries.")
+    return ActivityLibList
 
 def fetchActivityDetail(headers,ActivityLibList):
     logger.info(f"Fetching details for {len(ActivityLibList)} activity libraries.")
