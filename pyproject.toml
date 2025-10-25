@@ -1,0 +1,13 @@
+[project]
+name = "scu-2ndclass-autoscraper"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.8"
+dependencies = [
+    "requests>=2.32.5",
+]
+
+[tool.poetry.dev-dependencies]
+pytest = "^7.0"
+requests-mock = "^1.11"
