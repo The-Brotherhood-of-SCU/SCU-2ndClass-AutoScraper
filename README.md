@@ -1,6 +1,9 @@
 ## 支持/Support
 如果觉得这个项目有用的话请给一颗⭐️，非常感谢。
 
+## 说明
+本项目仅为爬虫软件，用于应对过于难用的搜索界面。该项目请求获取所有目录，寻找符合时间条件的课程id和名称并输出，以便同学们根据自己的时间选择合适的课程项目提升能力。
+
 If you find this project useful, please leave a ⭐️ for me. Thank you very much.
 
 # 使用方式
