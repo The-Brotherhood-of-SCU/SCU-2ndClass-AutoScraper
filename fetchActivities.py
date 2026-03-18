@@ -12,7 +12,7 @@ logger = logging.getLogger("my_logger")
 
 
 def fetchActivityLibList(headers):
-    url='https://zjczs.scu.edu.cn/ccyl-api/app/activity/list-activity-library'
+    url='https://dekt.scu.edu.cn/ccyl-api/app/activity/list-activity-library'
     #{ "pn": 1, "time": "1760769825192", "ps": 10, "level": "", "scoreType": "", "org": "", "order": "", "status": "SIGNUPING", "quality": "" }
     #1760769978.8043609
     payloads=[{
@@ -69,7 +69,7 @@ def fetchActivityLibList(headers):
 
 def fetchActivityDetail(headers,ActivityLibList):
     logger.info(f"Fetching details for {len(ActivityLibList)} activity libraries.")
-    url='https://zjczs.scu.edu.cn/ccyl-api/app/activity/get-lib-detail/'
+    url='https://dekt.scu.edu.cn/ccyl-api/app/activity/get-lib-detail/'
     cc=0
     ActivityList=[]
     for item in ActivityLibList:
